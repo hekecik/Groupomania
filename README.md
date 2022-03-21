@@ -16,9 +16,6 @@ Le serveur sera accessible sur http://localhost:3000
 ```
 npm install
 ```
-> cd frontend
-Ensuite, installer les composants du projet.
-
 ### lancer le projet
 ```
 npm run serve
