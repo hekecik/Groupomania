@@ -34,7 +34,7 @@
     import { mapGetters } from 'vuex'
 
     export default {
-        name: 'Users',
+        name: 'Users-admin',
 
         mounted: function() {
             this.$store.dispatch('getUserInfos');

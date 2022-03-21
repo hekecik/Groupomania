@@ -96,7 +96,7 @@
     import { required } from 'vuelidate/lib/validators'
 
     export default {
-        name: 'Single',
+        name: 'Single-post',
 
         mounted: function() {
             this.$store.dispatch('getOnePost', this.$route.params.id);

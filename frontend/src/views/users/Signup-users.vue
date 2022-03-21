@@ -59,7 +59,7 @@
     import { hasNumber, hasLowercaseLetter, hasCapitalcaseLetter } from '../../validators/password'
 
     export default {
-        name: 'Signup',
+        name: 'Signup-users',
 
         data() {
             return {

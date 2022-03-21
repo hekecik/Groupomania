@@ -43,7 +43,7 @@
     import { mapGetters } from 'vuex'
 
     export default {
-        name: 'Posts',
+        name: 'Posts-all',
 
         mounted: function() {
             this.$store.dispatch('getAllPosts');

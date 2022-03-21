@@ -25,8 +25,6 @@ if (!user) {
     try {
         user = JSON.parse(user);
         instance.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
-        console.log(user, "user else, try axios.default");
-        console.log(user.userId, "userId else, try axios.default");
     } catch (exception) {
         user = defaultUser;
         console.log(user, "catch user=defaultUser");
@@ -380,7 +378,8 @@ export default new Vuex.Store({
         // Modifier un commentaire
         editComment({ state }, modifiedComment) {
             return new Promise((resolve, reject) => {
-                instance.put(`posts/${state.comment.postId}/comments/${state.comment.id}}`, modifiedComment)
+                instance.put(`posts/${state.comment.postId}/comments/${state.comment.id}`, modifiedComment)
+                console.log(state.comment.id, 'comment.id')
                     .then(function(response) {
                         resolve(response);
                     })

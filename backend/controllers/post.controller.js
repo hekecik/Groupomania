@@ -58,6 +58,7 @@ exports.modifyPost = (req, res) => {
     const userId = req.body.userId
 
     let updatedPost = {
+        title: req.body.title,
         content: req.body.content
     }
 

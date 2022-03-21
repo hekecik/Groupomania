@@ -1,6 +1,6 @@
 <template>
     <div class="card-groupomania">
-        <h1><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier un post</h1>
+        <h1><b-icon-pencil-fill></b-icon-pencil-fill> Modifier le post</h1>
 
         <b-form @submit.prevent="submitForm" class="form">
             <b-form-group>
@@ -18,15 +18,19 @@
 
             <b-form-group>
                 <b-form-textarea
-                v-model="content"
                 placeholder="Contenu"
                 rows="4"
                 max-rows="8"
+                v-model="content"
                 ></b-form-textarea>
             </b-form-group>
 
+            <div class="current-post-image" v-if="image">
+                <img :src="image" :alt="title" class="post-image">
+            </div>
+
             <b-form-group>
-                <div class="mb-3">{{ imageUrl ? 'Image sélectionnée' : 'Sélectionner une image' }} : <b-button v-if="file" class="btn-remove-file" @click="removeFile()" size="sm" variant="outline-danger">Enlever l'image</b-button></div>
+                <div class="mb-3">{{ file ? 'Image sélectionnée' : 'Sélectionner une nouvelle image' }} : <b-button v-if="file" class="btn-remove-file" @click="removeFile()" size="sm" variant="outline-danger">Enlever l'image</b-button></div>
                 <b-form-file 
                 v-model="file"
                 plain
@@ -36,7 +40,7 @@
                 ></b-form-file>
             </b-form-group>
         
-            <b-button type="submit" variant="primary" :class="{ 'disabled' : invalidateFields }"><b-icon-plus-circle-fill></b-icon-plus-circle-fill> Publier</b-button>
+            <b-button type="submit" variant="success" :class="{ 'disabled' : invalidateFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
         </b-form>
     </div>
 </template>
@@ -46,17 +50,16 @@
     import { required } from 'vuelidate/lib/validators'
 
     export default {
-        name: 'Create',
+        name: 'Modify-posts',
 
         mounted: function() {
+            this.$store.dispatch('getOnePost', this.$route.params.id);
             this.$store.dispatch('getUserInfos');
         },
 
         data() {
             return {
-                title: '',
-                content: '',
-                imageUrl: null
+                file: null
             }
         },
 
@@ -68,8 +71,33 @@
 
         computed: {
             ...mapState({
+                post: 'post',
                 userInfos: 'userInfos'
             }),
+
+            title: {
+                get() {
+                    return this.$store.state.post.title;
+                },
+                set(newTitle) {
+                    this.$store.commit('SET_POST_TITLE', newTitle)
+                }
+            },
+
+            content: {
+                get() {
+                    return this.$store.state.post.content;
+                },
+                set(newContent) {
+                    this.$store.commit('SET_POST_CONTENT', newContent)
+                }
+            },
+
+            image: {
+                get() {
+                    return this.$store.state.post.imageUrl;
+                }
+            },
 
             invalidateFields: function() {
                 if (this.$v.$invalid) {
@@ -79,10 +107,9 @@
                 }
             }
         },
-
         methods: {
             onFilePicked(event) {
-                this.imageUrl = event.target.files[0];
+                this.file = event.target.files[0];
             },
 
             removeFile() {
@@ -94,18 +121,20 @@
 
                 if (!this.$v.$invalid) {
                     const formData = new FormData();
+                    const postId = this.post.id;
+
                     formData.append('title', this.title);
                     formData.append('content', this.content);
-                    formData.append('image', this.imageUrl);
+                    formData.append('image', this.file);
                     formData.append('userId', this.userInfos.id);
-                    
+
                     const self = this;
-                    this.$store.dispatch('createPost', formData)
+                    this.$store.dispatch('modifyPost', formData)
                         .then(function() {
-                            self.$router.push('/');
+                            self.$router.push(`/post/${postId}`);
                         }, function(error) {
                             console.log(error);
-                        });
+                        })
                 }
             }
         }

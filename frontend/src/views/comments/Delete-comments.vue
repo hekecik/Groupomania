@@ -10,7 +10,7 @@
     import { mapState } from 'vuex'
 
     export default {
-        name: 'Delete',
+        name: 'Delete-comments',
 
         mounted: function() {
             this.$store.dispatch('getOneComment', {

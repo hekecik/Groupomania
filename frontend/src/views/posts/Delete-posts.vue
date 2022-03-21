@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: 'Delete',
+        name: 'Delete-posts',
 
         mounted: function() {
             this.$store.dispatch('getOnePost', this.$route.params.id);

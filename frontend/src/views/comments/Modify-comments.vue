@@ -16,7 +16,7 @@
                 <b-form-invalid-feedback>Le commentaire est requis</b-form-invalid-feedback>
                 <b-form-valid-feedback>Le commentaire est valide</b-form-valid-feedback>
             </b-form-group>
-        
+
             <b-button type="submit" variant="success" :class="{ 'disabled' : invalidateFields }"><b-icon-pencil-fill></b-icon-pencil-fill> Modifier</b-button>
         </b-form>
     </div>
@@ -27,14 +27,14 @@
     import { required } from 'vuelidate/lib/validators'
 
     export default {
-        name: 'Modify',
+        name: 'Modify-comments',
 
         mounted: function() {
             this.$store.dispatch('getOneComment', {
                 postId: this.$route.params.postId,
                 id: this.$route.params.id
             });
-            
+
             this.$store.dispatch('getUserInfos');
         },
 
@@ -85,7 +85,7 @@
                     });
                 }
             }
-        } 
+        }
     }
 </script>
 

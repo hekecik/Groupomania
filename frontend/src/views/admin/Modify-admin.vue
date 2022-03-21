@@ -20,7 +20,7 @@
 
 <script>
     export default {
-        name: 'Modify',
+        name: 'Modify-admin',
 
         mounted: function() {
             this.$store.dispatch('getUserInfos');

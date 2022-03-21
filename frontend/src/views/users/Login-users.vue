@@ -44,7 +44,7 @@
     import { hasNumber, hasLowercaseLetter, hasCapitalcaseLetter } from '../../validators/password'
 
     export default {
-        name: 'Login',
+        name: 'Login-users',
 
         mounted: function() {
             if (this.$store.state.user.userId != -1) {

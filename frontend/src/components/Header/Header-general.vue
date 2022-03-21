@@ -57,7 +57,7 @@
     import { mapGetters } from 'vuex'
 
     export default {
-        name: 'Header',
+        name: 'Header-general',
 
         mounted: function() {
             if (this.$store.state.user.userId != -1) {
