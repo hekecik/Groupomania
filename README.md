@@ -1,20 +1,22 @@
-Installer nodejs et npm sur votre machine en local. Après, se positionner sur le dossier backend à partir du projet.
+## Installer nodejs et npm sur votre machine en local. Après, se positionner sur le dossier backend à partir du projet.
 
-> cd backend
+# > cd backend
 Ensuite, installer les composants du projet.
-
 > npm install
-Enfin, lancer le projet avec nodemon serve
 
-> nodemon serve
+Enfin, lancer le projet avec nodemon serve
+> npm start
+
 Le serveur sera accessible sur http://localhost:3000
 
-# frontend
+# > cd frontend
 
-## Project setup
+## installer les composants du projet.
 ```
 npm install
 ```
+> cd frontend
+Ensuite, installer les composants du projet.
 
 ### Compiles and hot-reloads for development
 ```
